@@ -1,0 +1,208 @@
+import { client, isSanityConfigured } from "./client";
+import {
+  CAPABILITIES_QUERY,
+  RESEARCH_QUERY,
+  STATS_QUERY,
+  TEAM_QUERY,
+} from "./queries";
+
+export type CapabilityDoc = {
+  _id?: string;
+  title: string;
+  description: string;
+  icon?: string;
+  tags?: string[];
+  order?: number;
+};
+
+export type StatDoc = {
+  _id?: string;
+  value: string;
+  label: string;
+  order?: number;
+};
+
+export type TeamMemberDoc = {
+  _id?: string;
+  name: string;
+  role: string;
+  bio?: string;
+  accent?: "navy" | "gold";
+  group?: "leadership" | "team";
+  order?: number;
+  image?: { asset?: { _ref?: string } } | null;
+};
+
+export type ResearchCategory = "Benchmark" | "Whitepaper" | "Case Study";
+
+export type ResearchEntryDoc = {
+  _id?: string;
+  title: string;
+  authors?: string;
+  abstract?: string;
+  category: ResearchCategory;
+  date?: string; // ISO date e.g. "2026-04-15"
+  venue?: string;
+  featured?: boolean;
+  pdfUrl?: string | null;
+};
+
+/* -------------------------- Defaults (offline-safe) ------------------------- */
+
+const DEFAULT_CAPABILITIES: CapabilityDoc[] = [
+  {
+    title: "Structure Prediction",
+    description:
+      "Atom-level structure inference for proteins, complexes and nucleic acids — built on AlphaFold 3, Boltz-2 and our internal benchmarks.",
+    tags: ["AlphaFold 3", "Boltz-2", "ESMFold"],
+    order: 1,
+  },
+  {
+    title: "Generative Design",
+    description:
+      "De novo design of binders, peptides, and small molecules conditioned on target structure, chemistry, and developability constraints.",
+    tags: ["RFdiffusion", "Chai-1", "Custom diffusion"],
+    order: 2,
+  },
+  {
+    title: "Lead Optimization",
+    description:
+      "Free-energy, ADMET, and selectivity-aware optimization loops — closing the gap between an in-silico hit and a clinical candidate.",
+    tags: ["FEP+", "ADMET", "QSAR"],
+    order: 3,
+  },
+  {
+    title: "Foundation Modeling",
+    description:
+      "Pretraining and fine-tuning of biology-specific foundation models on sequence, structure, and assay corpora — owned end-to-end.",
+    tags: ["Sequence", "Structure", "Multi-modal"],
+    order: 4,
+  },
+];
+
+const DEFAULT_STATS: StatDoc[] = [
+  { value: "10⁶⁰", label: "Drug-like molecules in chemical space", order: 1 },
+  { value: "<1%", label: "Targets with a tractable small-molecule lead", order: 2 },
+  { value: "12yr", label: "Average bench-to-bedside timeline today", order: 3 },
+];
+
+/* Research defaults are *only* used when Sanity isn't configured at all
+   (i.e. no projectId env var). When Sanity is configured but returns no
+   docs, the page will render its own "no research published yet" empty state. */
+const DEFAULT_RESEARCH: ResearchEntryDoc[] = [
+  {
+    category: "Benchmark",
+    title:
+      "Benchmarking AlphaFold 3 vs. Specialist Folders on Antibody–Antigen Complexes",
+    authors: "IndiskaAI Research",
+    venue: "Internal technical report",
+    date: "2026-04-15",
+    abstract:
+      "We compare AlphaFold 3 against specialist antibody-structure models on a held-out set of 142 published Ab–Ag complexes, measured by interface DockQ, CDR-H3 accuracy, and binding-mode classification.",
+  },
+  {
+    category: "Benchmark",
+    title:
+      "Boltz-2 Pose Recovery on a Targeted Kinase Set vs. Industrial Docking Stacks",
+    authors: "IndiskaAI Research",
+    venue: "Internal technical report",
+    date: "2026-02-08",
+    abstract:
+      "Pose-recovery and pose-ranking comparison of Boltz-2 against three production docking pipelines across a curated 84-target kinase set with co-crystal ground truth.",
+  },
+  {
+    category: "Whitepaper",
+    title:
+      "From Sequence to Therapeutic: A Reference Pipeline for Generative Discovery",
+    authors: "IndiskaAI",
+    venue: "Whitepaper",
+    date: "2025-09-30",
+    abstract:
+      "A short reference architecture for closed-loop generative discovery — target hypothesis, structural modeling, pocket-conditioned generation, FEP-aware optimization, and developability filtering.",
+  },
+];
+
+const DEFAULT_TEAM: TeamMemberDoc[] = [
+  {
+    name: "Atharva Shirke",
+    role: "Founder & CEO",
+    bio: "Founded IndiskaAI to bridge generative AI and structural biology in service of better therapeutics.",
+    accent: "navy",
+    group: "leadership",
+    order: 1,
+  },
+  {
+    name: "—",
+    role: "Founding Scientist (Open)",
+    bio: "Hiring. If you've shipped at the intersection of generative AI and therapeutic discovery, write to us.",
+    accent: "gold",
+    group: "team",
+    order: 2,
+  },
+  {
+    name: "—",
+    role: "Research Scientist (Open)",
+    bio: "Hiring. Structural biology background, comfort with modern structure prediction and physics-aware refinement.",
+    accent: "navy",
+    group: "team",
+    order: 3,
+  },
+  {
+    name: "—",
+    role: "ML Engineer (Open)",
+    bio: "Hiring. Deep PyTorch, distributed training, and an instinct for empirical rigor.",
+    accent: "gold",
+    group: "team",
+    order: 4,
+  },
+];
+
+/* ------------------------------ Fetchers ----------------------------------- */
+
+async function safeFetch<T>(query: string, fallback: T[]): Promise<T[]> {
+  if (!isSanityConfigured || !client) return fallback;
+  try {
+    const result = await client.fetch<T[]>(query, {}, { next: { revalidate: 60 } });
+    if (!result || result.length === 0) return fallback;
+    return result;
+  } catch {
+    return fallback;
+  }
+}
+
+export function getCapabilities() {
+  return safeFetch<CapabilityDoc>(CAPABILITIES_QUERY, DEFAULT_CAPABILITIES);
+}
+
+export function getStats() {
+  return safeFetch<StatDoc>(STATS_QUERY, DEFAULT_STATS);
+}
+
+export function getTeamMembers() {
+  return safeFetch<TeamMemberDoc>(TEAM_QUERY, DEFAULT_TEAM);
+}
+
+/**
+ * Research entries — different fallback semantics from the others.
+ *
+ * - When Sanity is **not** configured: returns DEFAULT_RESEARCH so dev/preview
+ *   has placeholder content.
+ * - When Sanity **is** configured: returns whatever Sanity has, including an
+ *   empty array. The page is responsible for rendering the empty state.
+ *
+ * Network/CDN errors fall back to DEFAULT_RESEARCH so a transient outage
+ * never blanks the page.
+ */
+export async function getResearchEntries(): Promise<ResearchEntryDoc[]> {
+  if (!isSanityConfigured || !client) return DEFAULT_RESEARCH;
+  try {
+    const result = await client.fetch<ResearchEntryDoc[]>(
+      RESEARCH_QUERY,
+      {},
+      { next: { revalidate: 60 } }
+    );
+    return result ?? [];
+  } catch {
+    return DEFAULT_RESEARCH;
+  }
+}

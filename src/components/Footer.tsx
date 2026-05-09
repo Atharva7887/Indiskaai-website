@@ -21,7 +21,7 @@ export default function Footer() {
         style={{ background: "radial-gradient(closest-side, #1E5BA8, transparent 70%)" }}
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-32">
+      <div className="relative mx-auto max-w-[1400px] px-6 md:px-10 pt-20 pb-12 md:pt-24">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +39,7 @@ export default function Footer() {
           </h2>
         </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-6">
           <div className="md:col-span-5">
             <div className="kicker text-cream-300 mb-3">Email</div>
             <a
@@ -90,7 +90,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-24 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-t border-cream-100/10 pt-8 text-sm text-cream-100/55">
+        <div className="mt-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-t border-cream-100/10 pt-6 text-sm text-cream-100/55">
           <div className="flex items-center gap-3">
             <Image
               src="/logo.png"

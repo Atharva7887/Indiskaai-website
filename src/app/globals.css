@@ -127,23 +127,16 @@ body {
 }
 
 /* Team card hover interaction.
-   Image zooms; text stays fully visible (information density wins over
-   theatrics). A subtle lift on the text container keeps the card feeling
-   interactive. Hover-only via @media so tapping on touch devices doesn't
-   trigger anything weird. */
+   Only the image scales — name, role, and bio stay fully visible at all
+   times. The card itself gets its lift from `hover:-translate-y-1` on the
+   article element. Hover-only via @media so touch devices don't trigger
+   anything weird when tapped. */
 .team-card-image {
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-}
-.team-card-text {
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 @media (hover: hover) {
   .group:hover .team-card-image {
     transform: scale(1.1);
-  }
-  .group:hover .team-card-text {
-    transform: translateY(-4px);
   }
 }

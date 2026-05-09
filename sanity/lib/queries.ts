@@ -8,7 +8,8 @@ export const TEAM_QUERY = groq`*[_type == "teamMember"] | order(order asc, _crea
   accent,
   group,
   order,
-  image
+  image,
+  linkedinUrl
 }`;
 
 export const CAPABILITIES_QUERY = groq`*[_type == "capability"] | order(order asc, _createdAt asc){

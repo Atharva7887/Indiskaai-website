@@ -30,6 +30,12 @@ export default defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: "linkedinUrl",
+      title: "LinkedIn Profile URL",
+      description: "Full URL — e.g. https://www.linkedin.com/in/username",
+      type: "url",
+    }),
+    defineField({
       name: "accent",
       title: "Accent colour",
       type: "string",
@@ -46,11 +52,12 @@ export default defineType({
       name: "group",
       title: "Group",
       type: "string",
-      initialValue: "team",
+      initialValue: "Science & Engineering",
+      validation: (r) => r.required(),
       options: {
         list: [
-          { title: "Leadership", value: "leadership" },
-          { title: "Scientists & Engineers", value: "team" },
+          { title: "Leadership", value: "Leadership" },
+          { title: "Science & Engineering", value: "Science & Engineering" },
         ],
         layout: "radio",
       },

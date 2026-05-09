@@ -28,9 +28,15 @@ export type TeamMemberDoc = {
   role: string;
   bio?: string;
   accent?: "navy" | "gold";
-  group?: "leadership" | "team";
+  /**
+   * Group values:
+   * - "Leadership" / "Science & Engineering" — current schema
+   * - "leadership" / "team" — legacy values (still tolerated; matched case-insensitively)
+   */
+  group?: string;
   order?: number;
   image?: { asset?: { _ref?: string } } | null;
+  linkedinUrl?: string;
 };
 
 export type ResearchCategory = "Benchmark" | "Whitepaper" | "Case Study";

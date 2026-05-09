@@ -125,3 +125,24 @@ body {
   color: var(--ink-muted);
   font-weight: 500;
 }
+
+/* Team card hover interaction.
+   Always-on transitions, but the hover state itself only triggers on
+   devices that have a real hover capability (mouse / trackpad). On touch
+   devices the bio stays visible — tapping the card just opens the LinkedIn
+   link without a confusing fade. */
+.team-card-image {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.team-card-text {
+  transition: opacity 0.4s ease;
+}
+@media (hover: hover) {
+  .group:hover .team-card-image {
+    transform: scale(1.1);
+  }
+  .group:hover .team-card-text {
+    opacity: 0;
+  }
+}

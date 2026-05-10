@@ -1,18 +1,21 @@
 import SmoothScroll from "@/components/SmoothScroll";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { getSiteSettings } from "../../../sanity/lib/fetch";
 
-export default function SiteLayout({
+export default async function SiteLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const settings = await getSiteSettings();
+
   return (
     <div className="grain">
       <SmoothScroll>
-        <Nav />
+        <Nav careersStatus={settings.careersStatus} />
         {children}
-        <Footer />
+        <Footer settings={settings} />
       </SmoothScroll>
     </div>
   );

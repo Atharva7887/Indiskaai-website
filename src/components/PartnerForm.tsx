@@ -20,7 +20,11 @@ const stages = [
   "Other",
 ];
 
-export default function PartnerForm() {
+export default function PartnerForm({
+  contactEmail = "hello@indiskaai.com",
+}: {
+  contactEmail?: string;
+}) {
   const [stage, setStage] = useState<Stage>("idle");
   const [interest, setInterest] = useState(interests[0]);
   const [pipelineStage, setPipelineStage] = useState(stages[0]);
@@ -47,8 +51,8 @@ export default function PartnerForm() {
         <p className="mt-6 text-ink-soft max-w-[42ch] mx-auto leading-[1.6]">
           Our partnerships team replies within two business days. In the meantime
           you can reach us directly at{" "}
-          <a href="mailto:partner@indiskaai.com" className="underline">
-            partner@indiskaai.com
+          <a href={`mailto:${contactEmail}`} className="underline">
+            {contactEmail}
           </a>
           .
         </p>

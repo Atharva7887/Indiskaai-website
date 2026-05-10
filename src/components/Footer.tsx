@@ -2,14 +2,24 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import type { SiteSettings } from "../../sanity/lib/fetch";
 
-export default function Footer() {
+export default function Footer({
+  settings,
+}: {
+  settings: Required<SiteSettings>;
+}) {
+  const emails = settings.emailAddresses ?? [];
+  const primary = emails[0];
+  const secondary = emails.slice(1);
+  const socialLinks = settings.socialLinks ?? [];
+
   return (
     <footer
       id="contact"
       className="relative overflow-hidden bg-ink text-cream-100 mt-12"
     >
-      {/* Decorative gradient blob */}
+      {/* Decorative gradient blobs */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 -right-40 h-[28rem] w-[28rem] rounded-full opacity-20 blur-3xl"
@@ -40,53 +50,78 @@ export default function Footer() {
         </motion.div>
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-6">
+          {/* Email column */}
           <div className="md:col-span-5">
             <div className="kicker text-cream-300 mb-3">Email</div>
-            <a
-              href="mailto:hello@indiskaai.com"
-              className="font-display text-2xl md:text-4xl tracking-tightest hover:text-gold transition-colors"
-            >
-              hello@indiskaai.com
-            </a>
+            {primary && (
+              <a
+                href={`mailto:${primary.address}`}
+                className="font-display text-2xl md:text-4xl tracking-tightest hover:text-gold transition-colors"
+              >
+                {primary.address}
+              </a>
+            )}
+            {secondary.length > 0 && (
+              <ul className="mt-4 space-y-1.5">
+                {secondary.map((e) => (
+                  <li
+                    key={e.address}
+                    className="text-sm text-cream-100/70 hover:text-cream-100 transition-colors"
+                  >
+                    <a href={`mailto:${e.address}`}>
+                      <span className="text-cream-300/80">{e.label}</span> ·{" "}
+                      {e.address}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
+          {/* Office column */}
           <div className="md:col-span-3">
             <div className="kicker text-cream-300 mb-3">Office</div>
-            <p className="text-cream-100/85 leading-[1.6]">
-              Pune,
-              <br />
-              Maharashtra, India
-            </p>
+            {settings.addressLink ? (
+              <a
+                href={settings.addressLink}
+                target="_blank"
+                rel="noreferrer"
+                className="block text-cream-100/85 leading-[1.6] hover:text-gold transition-colors whitespace-pre-line"
+              >
+                {settings.officeAddress}
+              </a>
+            ) : (
+              <p className="text-cream-100/85 leading-[1.6] whitespace-pre-line">
+                {settings.officeAddress}
+              </p>
+            )}
           </div>
 
+          {/* Connect column */}
           <div className="md:col-span-4">
             <div className="kicker text-cream-300 mb-3">Connect</div>
-            <ul className="space-y-2 text-cream-100/85">
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-gold transition-colors inline-flex items-center gap-2"
-                >
-                  LinkedIn <span aria-hidden>→</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-gold transition-colors inline-flex items-center gap-2"
-                >
-                  X / Twitter <span aria-hidden>→</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-gold transition-colors inline-flex items-center gap-2"
-                >
-                  Careers <span aria-hidden>→</span>
-                </a>
-              </li>
-            </ul>
+            {socialLinks.length === 0 ? (
+              <p className="text-cream-100/55 text-sm">No links yet.</p>
+            ) : (
+              <ul className="space-y-2 text-cream-100/85">
+                {socialLinks.map((s) => {
+                  const isExternal =
+                    /^https?:\/\//.test(s.url) || s.url.startsWith("//");
+                  return (
+                    <li key={s.label + s.url}>
+                      <a
+                        href={s.url}
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noreferrer" : undefined}
+                        className="hover:text-gold transition-colors inline-flex items-center gap-2"
+                      >
+                        {s.label} <span aria-hidden>→</span>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
         </div>
 

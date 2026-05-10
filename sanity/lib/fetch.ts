@@ -2,6 +2,7 @@ import { client, isSanityConfigured } from "./client";
 import {
   CAPABILITIES_QUERY,
   RESEARCH_QUERY,
+  SITE_SETTINGS_QUERY,
   STATS_QUERY,
   TEAM_QUERY,
 } from "./queries";
@@ -37,6 +38,17 @@ export type TeamMemberDoc = {
   order?: number;
   image?: { asset?: { _ref?: string } } | null;
   linkedinUrl?: string;
+};
+
+export type EmailEntry = { label: string; address: string };
+export type SocialLink = { label: string; url: string };
+
+export type SiteSettings = {
+  emailAddresses?: EmailEntry[];
+  officeAddress?: string;
+  addressLink?: string;
+  socialLinks?: SocialLink[];
+  careersStatus?: string;
 };
 
 export type ResearchCategory = "Benchmark" | "Whitepaper" | "Case Study";
@@ -186,6 +198,73 @@ export function getStats() {
 
 export function getTeamMembers() {
   return safeFetch<TeamMemberDoc>(TEAM_QUERY, DEFAULT_TEAM);
+}
+
+/* -------------------------------- Site settings -------------------------------- */
+
+const DEFAULT_SETTINGS: Required<SiteSettings> = {
+  emailAddresses: [
+    { label: "General", address: "hello@indiskaai.com" },
+    { label: "Partnerships", address: "partner@indiskaai.com" },
+    { label: "Careers", address: "careers@indiskaai.com" },
+    { label: "Research", address: "research@indiskaai.com" },
+  ],
+  officeAddress: "Pune,\nMaharashtra, India",
+  addressLink: "",
+  socialLinks: [
+    { label: "LinkedIn", url: "#" },
+    { label: "X / Twitter", url: "#" },
+    { label: "Careers", url: "/careers" },
+  ],
+  careersStatus: "",
+};
+
+/**
+ * Settings fetcher. Defensive merge with defaults so any missing field — or
+ * a deleted field in Sanity — never breaks the footer or pages that depend
+ * on contact info.
+ */
+export async function getSiteSettings(): Promise<Required<SiteSettings>> {
+  if (!isSanityConfigured || !client) return DEFAULT_SETTINGS;
+  try {
+    const result = await client.fetch<SiteSettings | null>(
+      SITE_SETTINGS_QUERY,
+      {},
+      { next: { revalidate: 60 } }
+    );
+    if (!result) return DEFAULT_SETTINGS;
+    return {
+      emailAddresses:
+        result.emailAddresses && result.emailAddresses.length > 0
+          ? result.emailAddresses
+          : DEFAULT_SETTINGS.emailAddresses,
+      officeAddress: result.officeAddress || DEFAULT_SETTINGS.officeAddress,
+      addressLink: result.addressLink || DEFAULT_SETTINGS.addressLink,
+      socialLinks:
+        result.socialLinks && result.socialLinks.length > 0
+          ? result.socialLinks
+          : DEFAULT_SETTINGS.socialLinks,
+      careersStatus: result.careersStatus || DEFAULT_SETTINGS.careersStatus,
+    };
+  } catch {
+    return DEFAULT_SETTINGS;
+  }
+}
+
+/**
+ * Looks up an email by label (case-insensitive). Falls back to the first
+ * configured email, then to a hardcoded default — so pages always have a
+ * mailto: target even if Sanity is misconfigured.
+ */
+export function emailFor(
+  settings: Pick<SiteSettings, "emailAddresses">,
+  label: string
+): string {
+  const all = settings.emailAddresses ?? [];
+  const match = all.find(
+    (e) => e.label?.toLowerCase() === label.toLowerCase()
+  );
+  return match?.address ?? all[0]?.address ?? "hello@indiskaai.com";
 }
 
 /**

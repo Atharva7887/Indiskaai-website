@@ -39,3 +39,11 @@ export const RESEARCH_QUERY = groq`*[_type == "researchEntry"] | order(featured 
   featured,
   "pdfUrl": coalesce(pdfFile.asset->url, pdfUrl)
 }`;
+
+export const SITE_SETTINGS_QUERY = groq`*[_type == "siteSettings"][0]{
+  emailAddresses[]{ label, address },
+  officeAddress,
+  addressLink,
+  socialLinks[]{ label, url },
+  careersStatus
+}`;

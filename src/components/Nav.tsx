@@ -22,7 +22,7 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(href + "/");
 }
 
-export default function Nav() {
+export default function Nav({ careersStatus }: { careersStatus?: string }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -65,15 +65,21 @@ export default function Nav() {
         <ul className="hidden items-center gap-9 lg:flex">
           {links.map((l) => {
             const active = isActive(pathname, l.href);
+            const showBadge = l.label === "Careers" && !!careersStatus;
             return (
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className={`group relative text-[0.92rem] transition-colors ${
+                  className={`group relative inline-flex items-center gap-2 text-[0.92rem] transition-colors ${
                     active ? "text-ink" : "text-ink-soft hover:text-ink"
                   }`}
                 >
                   {l.label}
+                  {showBadge && (
+                    <span className="text-[0.62rem] tracking-[0.12em] uppercase rounded-full bg-gold/90 text-ink px-2 py-0.5 leading-none font-medium">
+                      {careersStatus}
+                    </span>
+                  )}
                   <span
                     className={`absolute -bottom-1 left-0 h-px bg-ink transition-all duration-300 ${
                       active ? "w-full" : "w-0 group-hover:w-full"
@@ -122,13 +128,24 @@ export default function Nav() {
             className="lg:hidden border-t border-black/5 bg-cream-100/95 backdrop-blur-md"
           >
             <ul className="px-6 py-6 flex flex-col gap-4">
-              {links.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="text-lg font-display">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
+              {links.map((l) => {
+                const showBadge = l.label === "Careers" && !!careersStatus;
+                return (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      className="text-lg font-display inline-flex items-center gap-3"
+                    >
+                      {l.label}
+                      {showBadge && (
+                        <span className="text-[0.62rem] tracking-[0.12em] uppercase rounded-full bg-gold/90 text-ink px-2 py-0.5 leading-none font-medium">
+                          {careersStatus}
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                );
+              })}
               <li className="pt-3">
                 <Link href="/partner" className="cta cta-ghost w-full justify-center text-sm">
                   Get in touch

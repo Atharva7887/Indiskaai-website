@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
+import { emailFor, getSiteSettings } from "../../../../sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Careers — IndiskaAI",
@@ -53,7 +54,9 @@ const principles = [
   },
 ];
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const settings = await getSiteSettings();
+  const careersEmail = emailFor(settings, "Careers");
   return (
     <main className="relative">
       <PageHeader
@@ -107,7 +110,7 @@ export default function CareersPage() {
                 className="group border-b border-black/10 last:border-b-0"
               >
                 <a
-                  href="mailto:careers@indiskaai.com?subject=Application"
+                  href={`mailto:${careersEmail}?subject=Application`}
                   className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-7 px-2 md:px-4 transition-colors hover:bg-cream-100"
                 >
                   <div className="flex items-baseline gap-5">
@@ -131,8 +134,8 @@ export default function CareersPage() {
           </ul>
 
           <div className="mt-14 flex flex-wrap items-center gap-4">
-            <a href="mailto:careers@indiskaai.com" className="cta">
-              Email careers@indiskaai.com
+            <a href={`mailto:${careersEmail}`} className="cta">
+              Email {careersEmail}
               <span className="cta-arrow">→</span>
             </a>
             <a href="/team" className="cta cta-ghost">Meet the team</a>

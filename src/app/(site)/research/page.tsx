@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import {
+  emailFor,
   getResearchEntries,
+  getSiteSettings,
   type ResearchCategory,
   type ResearchEntryDoc,
 } from "../../../../sanity/lib/fetch";
@@ -121,7 +123,7 @@ function ResearchRow({ entry }: { entry: ResearchEntryDoc }) {
   );
 }
 
-function EmptyState() {
+function EmptyState({ researchEmail }: { researchEmail: string }) {
   return (
     <div className="border border-black/10 rounded-2xl bg-cream-50 px-6 md:px-12 py-16 md:py-24 text-center max-w-3xl mx-auto">
       <div className="kicker mb-4">Research log</div>
@@ -134,8 +136,8 @@ function EmptyState() {
         ready. Want to be on the list when the next one drops?
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
-        <a href="mailto:research@indiskaai.com" className="cta">
-          Email research@indiskaai.com
+        <a href={`mailto:${researchEmail}`} className="cta">
+          Email {researchEmail}
           <span className="cta-arrow">→</span>
         </a>
         {isSanityConfigured && (
@@ -211,7 +213,11 @@ function TechnicalInfrastructure() {
 }
 
 export default async function ResearchPage() {
-  const entries = await getResearchEntries();
+  const [entries, settings] = await Promise.all([
+    getResearchEntries(),
+    getSiteSettings(),
+  ]);
+  const researchEmail = emailFor(settings, "Research");
   const showEmptyState = entries.length === 0;
 
   return (
@@ -230,7 +236,7 @@ export default async function ResearchPage() {
       <section className="pb-20 md:pb-28">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10">
           {showEmptyState ? (
-            <EmptyState />
+            <EmptyState researchEmail={researchEmail} />
           ) : (
             <ul className="border-t border-black/10">
               {entries.map((entry) => (
@@ -247,8 +253,8 @@ export default async function ResearchPage() {
                 </h3>
               </div>
               <div className="md:col-span-5 md:text-right">
-                <a href="mailto:research@indiskaai.com" className="cta">
-                  Email research@indiskaai.com
+                <a href={`mailto:${researchEmail}`} className="cta">
+                  Email {researchEmail}
                   <span className="cta-arrow">→</span>
                 </a>
               </div>

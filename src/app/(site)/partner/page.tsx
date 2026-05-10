@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import PartnerForm from "@/components/PartnerForm";
+import { emailFor, getSiteSettings } from "../../../../sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Partner — IndiskaAI",
@@ -23,7 +24,9 @@ const engagementTypes = [
   },
 ];
 
-export default function PartnerPage() {
+export default async function PartnerPage() {
+  const settings = await getSiteSettings();
+  const partnerEmail = emailFor(settings, "Partnerships");
   return (
     <main className="relative">
       <PageHeader
@@ -57,16 +60,16 @@ export default function PartnerPage() {
             <div className="border-t border-black/10 pt-6 text-sm text-ink-muted">
               <div className="kicker mb-3">Direct contact</div>
               <a
-                href="mailto:partner@indiskaai.com"
+                href={`mailto:${partnerEmail}`}
                 className="font-display text-2xl tracking-tightest text-ink hover:text-navy transition-colors"
               >
-                partner@indiskaai.com
+                {partnerEmail}
               </a>
             </div>
           </aside>
 
           <div className="lg:col-span-7">
-            <PartnerForm />
+            <PartnerForm contactEmail={partnerEmail} />
           </div>
         </div>
       </section>

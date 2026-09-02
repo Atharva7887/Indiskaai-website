@@ -40,6 +40,9 @@ export const metadata: Metadata = {
   },
 };
 
+import CustomCursor from "@/components/CustomCursor";
+import Preloader from "@/components/Preloader";
+
 export default function RootLayout({
   children,
 }: {
@@ -48,6 +51,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
       <body className="antialiased">
+        <Preloader />
+        <CustomCursor />
         {children}
         <Analytics />
       </body>

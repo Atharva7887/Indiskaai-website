@@ -1,12 +1,9 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
-
-const DnaHelix = dynamic(() => import("./DnaHelix"), {
-  ssr: false,
-  loading: () => null,
-});
+import { motion, useScroll, useTransform } from "framer-motion";
+import TextReveal from "@/components/TextReveal";
+import ParticleBackground from "@/components/ParticleBackground";
+import { useRef } from "react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
@@ -14,17 +11,50 @@ const fadeUp = {
 };
 
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+
   return (
     <section
       id="top"
+      ref={ref}
       className="relative min-h-[100svh] overflow-hidden pt-28 md:pt-32 pb-32 md:pb-24"
     >
-      {/* 3D backdrop —
+      <ParticleBackground className="z-10" />
+
+      {/* Video backdrop —
           • mobile: centered behind the copy at reduced opacity so it reads as ambient
           • desktop: pinned to the right of the headline */}
-      <div className="pointer-events-auto absolute inset-0 md:left-auto md:right-[-8%] md:w-[58%] z-10 opacity-60 md:opacity-100">
-        <DnaHelix />
-      </div>
+      <motion.div 
+        style={{ y: yParallax }}
+        className="pointer-events-none absolute inset-0 md:left-auto md:right-[-4%] md:w-[58%] z-[11] opacity-50 md:opacity-100 flex items-center justify-center"
+      >
+        <div className="relative w-full h-full overflow-hidden">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            style={{ mixBlendMode: "multiply" }}
+          >
+            <source src="/hero-video.mp4" type="video/mp4" />
+          </video>
+          {/* Soft edge fade so the video blends into the page */}
+          <div
+            aria-hidden
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 90% 80% at 50% 50%, transparent 40%, rgba(250,247,240,1) 85%)",
+            }}
+          />
+        </div>
+      </motion.div>
 
       {/* Radial wash — different framing per breakpoint so the copy stays readable */}
       <div
@@ -68,38 +98,39 @@ export default function Hero() {
           to{" "}
           <span className="relative inline-block">
             <em className="not-italic font-display italic">therapeutic</em>
-            <svg
+            <motion.svg
               className="absolute -bottom-2 left-0 w-full"
               viewBox="0 0 320 14"
               fill="none"
               preserveAspectRatio="none"
               aria-hidden
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <path
+              <motion.path
                 d="M2 9 C 80 2, 200 14, 318 6"
                 stroke="#F4C430"
                 strokeWidth="3.2"
                 strokeLinecap="round"
                 fill="none"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
               />
-            </svg>
+            </motion.svg>
           </span>
           ,
           <br />
           accelerated.
         </motion.h1>
 
-        <motion.p
-          variants={fadeUp}
-          initial="initial"
-          animate="animate"
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+        <TextReveal
+          as="p"
+          text="IndiskaAI builds foundation models and structural biology systems for drug discovery — collapsing months of wet-lab work into hours of principled, in-silico design."
           className="mt-8 max-w-[44ch] text-[1.06rem] md:text-[1.15rem] leading-[1.55] text-ink-soft"
-        >
-          IndiskaAI builds foundation models and structural biology systems for
-          drug discovery — collapsing months of wet-lab work into hours of
-          principled, in-silico design.
-        </motion.p>
+          delay={0.4}
+        />
 
         <motion.div
           variants={fadeUp}
@@ -117,7 +148,7 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* Scroll indicator — animated arrow-down chevron only */}
+        {/* Scroll indicator */}
         <motion.a
           href="#capabilities"
           aria-label="Scroll to capabilities"

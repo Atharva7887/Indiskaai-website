@@ -2,7 +2,6 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import TextReveal from "@/components/TextReveal";
-import ParticleBackground from "@/components/ParticleBackground";
 import { useRef } from "react";
 
 const fadeUp = {
@@ -24,27 +23,20 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-[100svh] overflow-hidden pt-28 md:pt-32 pb-32 md:pb-24"
     >
-      <ParticleBackground className="z-10" />
-
-      {/* Video backdrop —
-          • mobile: centered behind the copy at reduced opacity so it reads as ambient
-          • desktop: pinned to the right of the headline */}
+      {/* Static Image backdrop */}
       <motion.div 
         style={{ y: yParallax }}
         className="pointer-events-none absolute inset-0 md:left-auto md:right-[-4%] md:w-[58%] z-[11] opacity-50 md:opacity-100 flex items-center justify-center"
       >
         <div className="relative w-full h-full overflow-hidden">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80&w=2000"
+            alt="Background"
             className="absolute inset-0 w-full h-full object-cover object-center"
             style={{ mixBlendMode: "multiply" }}
-          >
-            <source src="/hero-video.mp4" type="video/mp4" />
-          </video>
-          {/* Soft edge fade so the video blends into the page */}
+          />
+          {/* Soft edge fade so the image blends into the page */}
           <div
             aria-hidden
             className="absolute inset-0 pointer-events-none"

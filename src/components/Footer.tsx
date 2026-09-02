@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import type { SiteSettings } from "../../sanity/lib/fetch";
-import ParticleBackground from "@/components/ParticleBackground";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -45,7 +44,6 @@ export default function Footer({
       ref={ref}
       className="relative overflow-hidden bg-ink text-cream-100 mt-12"
     >
-      <ParticleBackground className="z-0 opacity-40 mix-blend-screen" />
       {/* Decorative gradient blobs — subtle animated pulse + parallax */}
       <motion.div
         aria-hidden

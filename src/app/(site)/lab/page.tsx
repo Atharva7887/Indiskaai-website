@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import LabStage from "@/components/lab/LabStage";
 
 export const metadata: Metadata = {
-  title: "Lab — IndiskaAI",
+  title: "Lab",
   description:
     "Interactive shader pieces — liquid chrome, water, gravity grid, mesh gradient. Move the cursor. Click anywhere.",
 };

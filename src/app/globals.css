@@ -162,6 +162,21 @@ body {
   box-shadow: 0 4px 16px rgba(26, 26, 26, 0.15);
 }
 
+/* Light CTA — for use on dark/navy sections, e.g. mid-page CTA bands */
+.cta-light {
+  background: var(--bg);
+  color: var(--ink);
+}
+.cta-light::before {
+  display: none;
+}
+.cta-light:hover {
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow: 0 4px 24px rgba(244, 196, 48, 0.35);
+  transform: translateY(-1px);
+}
+
 /* Number / kicker eyebrow */
 .kicker {
   font-family: var(--font-inter), ui-sans-serif;
@@ -199,9 +214,3 @@ section {
   position: relative;
 }
 
-/* ─── Custom Cursor Hiding ─── */
-@media (pointer: fine) {
-  body, a, button, input, select, textarea, [role="button"] {
-    cursor: none !important;
-  }
-}

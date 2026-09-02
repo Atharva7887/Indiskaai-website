@@ -8,7 +8,7 @@ import StudioNotConfigured from "./StudioNotConfigured";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Studio — IndiskaAI",
+  title: "Studio",
   robots: { index: false, follow: false },
 };
 

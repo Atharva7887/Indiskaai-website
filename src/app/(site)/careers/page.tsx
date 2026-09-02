@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import { emailFor, getSiteSettings } from "../../../../sanity/lib/fetch";
 
 export const metadata: Metadata = {
-  title: "Careers — IndiskaAI",
+  title: "Careers",
   description:
     "Join IndiskaAI. We're hiring researchers, engineers, and scientists to build the next generation of generative biology.",
 };

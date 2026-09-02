@@ -1,19 +1,9 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
-import type { StatDoc } from "../../sanity/lib/fetch";
 
-const textReveal = {
-  initial: { opacity: 0, y: 28 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-export default function About({ stats }: { stats: StatDoc[] }) {
+export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
@@ -35,6 +25,25 @@ export default function About({ stats }: { stats: StatDoc[] }) {
               Built by people who have done the bench{" "}
               <span className="italic text-navy">and</span> the bits.
             </h2>
+
+            {/* Structural biology lab — grounds the "bench" half of the claim */}
+            <div className="mt-10 relative aspect-[4/3] overflow-hidden rounded-2xl border border-black/5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://images.unsplash.com/photo-1630959305790-4c956ce6c0b6?auto=format&fit=crop&q=80&w=1200"
+                alt="Scientist examining a sample under a microscope in a structural biology laboratory"
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(26,26,26,0) 55%, rgba(26,26,26,0.32) 100%)",
+                }}
+              />
+            </div>
           </motion.div>
 
           <div className="lg:col-span-7 space-y-6 text-ink-soft text-[1.06rem] md:text-[1.12rem] leading-[1.65]">
@@ -69,35 +78,6 @@ export default function About({ stats }: { stats: StatDoc[] }) {
                 }}
               >
                 {el}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Stats strip */}
-        <div className="mt-24 md:mt-32 border-t border-black/10 pt-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
-            {stats.map((s, i) => (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 32, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{
-                  duration: 1,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: i * 0.12,
-                }}
-                className="group"
-              >
-                <div className="font-display text-[clamp(2.6rem,5vw,4.6rem)] leading-none tracking-tightest text-ink transition-colors duration-500 group-hover:text-navy">
-                  {s.value}
-                </div>
-                <div className="mt-4 text-ink-muted text-[0.95rem] leading-[1.5] max-w-[28ch]">
-                  {s.label}
-                </div>
-                {/* Underline accent */}
-                <div className="mt-4 h-[2px] w-0 bg-gradient-to-r from-gold to-navy transition-all duration-700 group-hover:w-16" />
               </motion.div>
             ))}
           </div>

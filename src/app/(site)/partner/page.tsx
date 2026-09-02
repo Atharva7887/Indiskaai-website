@@ -4,7 +4,7 @@ import PartnerForm from "@/components/PartnerForm";
 import { emailFor, getSiteSettings } from "../../../../sanity/lib/fetch";
 
 export const metadata: Metadata = {
-  title: "Partner — IndiskaAI",
+  title: "Partner",
   description:
     "Partner with IndiskaAI for structural-AI-led drug discovery programs. We work with biopharma teams from target through clinical candidate.",
 };

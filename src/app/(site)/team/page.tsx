@@ -5,7 +5,7 @@ import { getTeamMembers, type TeamMemberDoc } from "../../../../sanity/lib/fetch
 import { urlForImage } from "../../../../sanity/lib/image";
 
 export const metadata: Metadata = {
-  title: "Team — IndiskaAI",
+  title: "Team",
   description:
     "Leadership team and the scientists, engineers, and operators behind IndiskaAI.",
 };

@@ -11,7 +11,7 @@ import {
 import { isSanityConfigured } from "../../../../sanity/lib/client";
 
 export const metadata: Metadata = {
-  title: "Research — IndiskaAI",
+  title: "Research",
   description:
     "IndiskaAI research notes, internal benchmarks, whitepapers, and case studies.",
 };

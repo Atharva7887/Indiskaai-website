@@ -1,7 +1,9 @@
 import Hero from "@/components/Hero";
 import Capabilities from "@/components/Capabilities";
+import StatsStrip from "@/components/StatsStrip";
 import Services from "@/components/Services";
 import Approach from "@/components/Approach";
+import MidPageCTA from "@/components/MidPageCTA";
 import About from "@/components/About";
 import Reveal from "@/components/Reveal";
 import { getCapabilities, getStats } from "../../../sanity/lib/fetch";
@@ -17,12 +19,14 @@ export default async function Home() {
       <Hero />
       <div className="divider mx-auto max-w-[1400px]" />
       <Capabilities items={capabilities} />
+      <StatsStrip stats={stats} />
       <div className="divider mx-auto max-w-[1400px]" />
       <Services />
       <div className="divider mx-auto max-w-[1400px]" />
       <Approach />
+      <MidPageCTA />
       <div className="divider mx-auto max-w-[1400px]" />
-      <About stats={stats} />
+      <About />
       <Reveal />
     </main>
   );

@@ -23,18 +23,17 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-[100svh] overflow-hidden pt-28 md:pt-32 pb-32 md:pb-24"
     >
-      {/* Static Image backdrop */}
-      <motion.div 
+      {/* Generative protein-structure backdrop */}
+      <motion.div
         style={{ y: yParallax }}
-        className="pointer-events-none absolute inset-0 md:left-auto md:right-[-4%] md:w-[58%] z-[11] opacity-50 md:opacity-100 flex items-center justify-center"
+        className="pointer-events-none absolute inset-0 md:left-auto md:right-[-4%] md:w-[58%] z-[11] opacity-60 md:opacity-100 flex items-center justify-center"
       >
         <div className="relative w-full h-full overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80&w=2000"
-            alt="Background"
+            src="https://images.unsplash.com/photo-1637929476734-bd7f5f78e40a?auto=format&fit=crop&q=80&w=2000"
+            alt="Generative rendering of a DNA double-helix structure"
             className="absolute inset-0 w-full h-full object-cover object-center"
-            style={{ mixBlendMode: "multiply" }}
           />
           {/* Soft edge fade so the image blends into the page */}
           <div

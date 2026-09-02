@@ -72,6 +72,31 @@ export default function Approach() {
           />
         </div>
 
+        {/* Supporting visual — computational analysis, grounds "auditable" in something concrete */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="relative mb-20 md:mb-28 aspect-[21/9] overflow-hidden rounded-2xl border border-black/5"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://images.unsplash.com/photo-1766297248160-87aca6fa59ef?auto=format&fit=crop&q=80&w=2000"
+            alt="Scientist reviewing structural imaging data across dual monitors"
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(26,26,26,0) 60%, rgba(26,26,26,0.28) 100%)",
+            }}
+          />
+        </motion.div>
+
         {/* Timeline */}
         <div className="relative pl-8 md:pl-16">
           {/* Vertical baseline */}

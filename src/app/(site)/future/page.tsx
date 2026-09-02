@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
-  title: "The Future — IndiskaAI",
+  title: "The Future",
   description:
     "Where IndiskaAI is heading — programmable biology, end-to-end therapeutic design, and the long arc of generative medicine.",
 };

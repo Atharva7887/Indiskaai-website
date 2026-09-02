@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
+import Publications from "@/components/Publications";
 import {
   emailFor,
   getResearchEntries,
@@ -260,7 +261,15 @@ export default async function ResearchPage() {
               </div>
             </div>
           )}
+        </div>
+      </section>
 
+      <div className="divider mx-auto max-w-[1400px]" />
+      <Publications />
+      <div className="divider mx-auto max-w-[1400px]" />
+
+      <section className="pb-20 md:pb-28">
+        <div className="mx-auto max-w-[1400px] px-6 md:px-10">
           <TechnicalInfrastructure />
         </div>
       </section>

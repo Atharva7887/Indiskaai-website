@@ -1,8 +1,6 @@
 import Hero from "@/components/Hero";
 import Capabilities from "@/components/Capabilities";
-// Molecular Interaction scrollytelling — on ice for launch.
-// Re-enable by uncommenting the import + the <BindingSection /> below.
-// import BindingSection from "@/components/BindingSection";
+import Services from "@/components/Services";
 import Approach from "@/components/Approach";
 import About from "@/components/About";
 import Reveal from "@/components/Reveal";
@@ -19,7 +17,8 @@ export default async function Home() {
       <Hero />
       <div className="divider mx-auto max-w-[1400px]" />
       <Capabilities items={capabilities} />
-      {/* <BindingSection /> */}
+      <div className="divider mx-auto max-w-[1400px]" />
+      <Services />
       <div className="divider mx-auto max-w-[1400px]" />
       <Approach />
       <div className="divider mx-auto max-w-[1400px]" />

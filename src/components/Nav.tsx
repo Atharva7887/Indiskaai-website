@@ -41,10 +41,10 @@ export default function Nav({ careersStatus }: { careersStatus?: string }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-md bg-cream-100/70 border-b border-black/5"
-          : "bg-transparent"
+          ? "backdrop-blur-md bg-cream-100/70 border-black/5"
+          : "bg-transparent border-transparent"
       }`}
     >
       <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 md:px-10">
@@ -122,19 +122,39 @@ export default function Nav({ careersStatus }: { careersStatus?: string }) {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="lg:hidden border-t border-black/5 bg-cream-100/95 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="lg:hidden border-t border-black/5 bg-cream-100/95 backdrop-blur-md origin-top"
           >
-            <ul className="px-6 py-6 flex flex-col gap-4">
+            <motion.ul 
+              className="px-6 py-6 flex flex-col gap-4"
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={{
+                open: {
+                  transition: { staggerChildren: 0.05, delayChildren: 0.1 }
+                },
+                closed: {
+                  transition: { staggerChildren: 0.05, staggerDirection: -1 }
+                }
+              }}
+            >
               {links.map((l) => {
                 const showBadge = l.label === "Careers" && !!careersStatus;
                 return (
-                  <li key={l.href}>
+                  <motion.li 
+                    key={l.href}
+                    variants={{
+                      open: { opacity: 1, y: 0, transition: { ease: [0.16, 1, 0.3, 1], duration: 0.5 } },
+                      closed: { opacity: 0, y: -10, transition: { ease: [0.16, 1, 0.3, 1], duration: 0.3 } }
+                    }}
+                  >
                     <Link
                       href={l.href}
                       className="text-lg font-display inline-flex items-center gap-3"
+                      onClick={() => setOpen(false)}
                     >
                       {l.label}
                       {showBadge && (
@@ -143,16 +163,21 @@ export default function Nav({ careersStatus }: { careersStatus?: string }) {
                         </span>
                       )}
                     </Link>
-                  </li>
+                  </motion.li>
                 );
               })}
-              <li className="pt-3">
-                <Link href="/partner" className="cta cta-ghost w-full justify-center text-sm">
+              <motion.li 
+                className="pt-3"
+                variants={{
+                  open: { opacity: 1, y: 0, transition: { ease: [0.16, 1, 0.3, 1], duration: 0.5 } },
+                  closed: { opacity: 0, y: -10, transition: { ease: [0.16, 1, 0.3, 1], duration: 0.3 } }
+                }}
+              >
+                <Link href="/partner" className="cta cta-ghost w-full justify-center text-sm" onClick={() => setOpen(false)}>
                   Get in touch
-                  <span className="cta-arrow">→</span>
                 </Link>
-              </li>
-            </ul>
+              </motion.li>
+            </motion.ul>
           </motion.div>
         )}
       </AnimatePresence>

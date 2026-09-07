@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
+import Publications from "@/components/Publications";
 import {
   emailFor,
   getResearchEntries,
@@ -10,7 +11,7 @@ import {
 import { isSanityConfigured } from "../../../../sanity/lib/client";
 
 export const metadata: Metadata = {
-  title: "Research — IndiskaAI",
+  title: "Research",
   description:
     "IndiskaAI research notes, internal benchmarks, whitepapers, and case studies.",
 };
@@ -167,7 +168,7 @@ const infrastructure: { label: string; value: string; detail: string }[] = [
     label: "Stack",
     value: "PyTorch · JAX · CUDA",
     detail:
-      "Owned ML stack — distributed training, mixed-precision, and reproducible experiment lineage end-to-end.",
+      "Owned ML stack: distributed training, mixed-precision, and reproducible experiment lineage end-to-end.",
   },
 ];
 
@@ -260,7 +261,15 @@ export default async function ResearchPage() {
               </div>
             </div>
           )}
+        </div>
+      </section>
 
+      <div className="divider mx-auto max-w-[1400px]" />
+      <Publications />
+      <div className="divider mx-auto max-w-[1400px]" />
+
+      <section className="pb-20 md:pb-28">
+        <div className="mx-auto max-w-[1400px] px-6 md:px-10">
           <TechnicalInfrastructure />
         </div>
       </section>

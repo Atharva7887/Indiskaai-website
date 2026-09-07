@@ -122,7 +122,7 @@ export default function PartnerForm({
           id="message"
           name="message"
           rows={5}
-          className="w-full bg-cream-100 border border-black/10 rounded-lg px-4 py-3 text-ink placeholder-ink-muted/60 focus:outline-none focus:border-navy/60 transition-colors resize-none"
+          className="w-full bg-cream-100 border border-black/10 rounded-lg px-4 py-3 text-ink placeholder-ink-muted/60 outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:border-navy/60 transition-colors resize-none"
           placeholder="Target, modality, timeline, or anything else you want us to know."
         />
       </div>
@@ -180,7 +180,7 @@ function Field({
         name={id}
         type={type}
         required={required}
-        className="w-full bg-cream-100 border border-black/10 rounded-lg px-4 py-3 text-ink placeholder-ink-muted/60 focus:outline-none focus:border-navy/60 transition-colors"
+        className="w-full bg-cream-100 border border-black/10 rounded-lg px-4 py-3 text-ink placeholder-ink-muted/60 outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:border-navy/60 transition-colors"
       />
     </div>
   );

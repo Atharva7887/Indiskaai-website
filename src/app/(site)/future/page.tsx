@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
-  title: "The Future — IndiskaAI",
+  title: "The Future",
   description:
-    "Where IndiskaAI is heading — programmable biology, end-to-end therapeutic design, and the long arc of generative medicine.",
+    "Where IndiskaAI is heading: programmable biology, end-to-end therapeutic design, and the long arc of generative medicine.",
 };
 
 const horizons = [
@@ -16,17 +16,17 @@ const horizons = [
   {
     when: "3 years",
     title: "Foundation models for biology",
-    body: "Multi-modal models that jointly reason over sequence, structure, dynamics, and assay readouts — trained on a corpus that compounds with every program we run.",
+    body: "Multi-modal models that jointly reason over sequence, structure, dynamics, and assay readouts, trained on a corpus that compounds with every program we run.",
   },
   {
     when: "5 years",
     title: "Programmable therapeutics",
-    body: "Designed-from-scratch biologics and small molecules with predictable PK, immunogenicity, and selectivity profiles — and a meaningfully shorter clinic-to-bedside loop.",
+    body: "Designed-from-scratch biologics and small molecules with predictable PK, immunogenicity, and selectivity profiles, plus a meaningfully shorter clinic-to-bedside loop.",
   },
   {
     when: "10 years",
     title: "Generative medicine",
-    body: "Personalized, structurally-grounded therapeutic design at the scale of a population — and a research culture in which dry-lab and wet-lab are no longer distinguishable.",
+    body: "Personalized, structurally-grounded therapeutic design at the scale of a population, and a research culture in which dry-lab and wet-lab are no longer distinguishable.",
   },
 ];
 
@@ -91,12 +91,12 @@ export default function FuturePage() {
           <div className="md:col-span-8 space-y-6 text-cream-100/90 leading-[1.7] text-[1.05rem] md:text-[1.18rem]">
             <p>
               The wet-lab will not disappear. It will become an instrument that
-              the model wields — precise, expensive, and used only when its
+              the model wields: precise, expensive, and used only when its
               evidence is needed.
             </p>
             <p>
               Most of medicine has been written by accident. The next chapter
-              will be written by design — and the alphabet is structure,
+              will be written by design, and the alphabet is structure,
               dynamics, and the learned priors that connect them.
             </p>
             <p>

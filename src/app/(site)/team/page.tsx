@@ -40,7 +40,7 @@ function PersonCard({ p }: { p: TeamMemberDoc }) {
   // defined in globals.css so the hover-only fade/scale only fires on devices
   // that actually have hover (i.e. mouse, not touch).
   const card = (
-    <article className="group relative bg-cream-50 border border-black/5 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_60px_-30px_rgba(30,91,168,0.45)] h-full">
+    <article className="group relative bg-cream-50 border border-black/5 rounded-2xl overflow-hidden transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_24px_60px_-30px_rgba(30,91,168,0.45)] h-full">
       {/* Photo area — large 4:5 portrait. Image scales subtly on hover. */}
       <div className="relative aspect-[4/5] overflow-hidden bg-cream-200">
         {imageUrl ? (
@@ -105,7 +105,7 @@ function PersonCard({ p }: { p: TeamMemberDoc }) {
         target="_blank"
         rel="noreferrer"
         className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream-100 rounded-2xl"
-        aria-label={`${p.name} — LinkedIn (opens in a new tab)`}
+        aria-label={`${p.name}: LinkedIn (opens in a new tab)`}
       >
         {card}
       </a>
@@ -152,7 +152,7 @@ export default async function TeamPage() {
             <span className="italic text-navy">first-principles thinkers.</span>
           </>
         }
-        lede="A small team holding ambitious ground. We're growing — most of the people who will shape this company haven't joined yet."
+        lede="A small team holding ambitious ground. We're growing, and most of the people who will shape this company haven't joined yet."
       />
 
       <section className="py-10 md:py-14">
@@ -160,7 +160,7 @@ export default async function TeamPage() {
           <div className="kicker mb-8 md:mb-10">Leadership Team</div>
           <TeamGrid
             members={leadership}
-            emptyHint="No leadership entries yet — add one in /studio under Team Member with Group = Leadership."
+            emptyHint="No leadership entries yet. Add one in /studio under Team Member with Group = Leadership."
           />
         </div>
       </section>
@@ -170,13 +170,13 @@ export default async function TeamPage() {
           <div className="kicker mb-8 md:mb-10">Scientists &amp; Engineers</div>
           <TeamGrid
             members={scientists}
-            emptyHint="No team entries yet — add one in /studio under Team Member with Group = Science & Engineering."
+            emptyHint="No team entries yet. Add one in /studio under Team Member with Group = Science & Engineering."
           />
 
           <div className="mt-16 border-t border-black/10 pt-10 flex flex-wrap items-center justify-between gap-6">
             <p className="text-ink-soft max-w-[44ch] leading-[1.6]">
               These open seats are real. If you recognise yourself in one of
-              them, write to us — we read every application personally.
+              them, write to us. We read every application personally.
             </p>
             <a href="/careers" className="cta">
               See open roles

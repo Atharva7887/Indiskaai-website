@@ -1,11 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { SERVICES } from "@/lib/services-data";
 
 /**
- * Condensed teaser — the full services/products breakdown is moving to
- * its own "What we offer" nav destination once that IA lands. Until then
- * this stays a short pointer rather than a duplicate of that page.
+ * Condensed teaser for the /services hub — full descriptions live on the
+ * dedicated pages (also reachable via the Nav "Services" dropdown), this
+ * stays a short pointer plus a tag row naming each service line.
  */
 export default function Services() {
   return (
@@ -24,17 +26,30 @@ export default function Services() {
               What we offer
             </div>
             <h2 className="font-display text-[clamp(2rem,5vw,3.6rem)] leading-[0.98] tracking-tightest text-ink">
-              Services built for{" "}
-              <span className="italic text-navy">discovery.</span>
+              Antibody discovery,{" "}
+              <span className="italic text-navy">engineered.</span>
             </h2>
             <p className="mt-5 text-ink-soft text-[1.02rem] leading-[1.6] max-w-[38ch]">
-              From target hypothesis to optimized lead — deployed as a
-              pipeline, a program, or a standalone engagement.
+              Libraries, discovery, engineering, and AI-driven data, deployed
+              as a pipeline, a program, or a standalone engagement.
             </p>
-            <a href="/partner" className="cta cta-ghost mt-8">
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              {SERVICES.map((s) => (
+                <Link
+                  key={s.slug}
+                  href={`/services/${s.slug}`}
+                  className="text-[0.72rem] tracking-[0.06em] uppercase rounded-full border border-black/10 px-3 py-1.5 text-ink-muted bg-cream-50/50 transition-colors duration-300 hover:border-navy/30 hover:bg-navy/5 hover:text-navy"
+                >
+                  {s.title}
+                </Link>
+              ))}
+            </div>
+
+            <Link href="/services" className="cta cta-ghost mt-8">
               See what we offer
               <span className="cta-arrow">→</span>
-            </a>
+            </Link>
           </motion.div>
 
           {/* Supporting visual — a physical model of a protein complex, makes "structure" tangible */}

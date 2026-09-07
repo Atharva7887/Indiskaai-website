@@ -20,10 +20,6 @@ export default function StatsStrip({ stats }: { stats: StatDoc[] }) {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-[52ch] mb-12 md:mb-16"
         >
-          <div className="kicker mb-5">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold mr-2 align-middle" />
-            Why this is hard
-          </div>
           <h2 className="font-display text-[clamp(1.7rem,3.6vw,2.6rem)] leading-[1.1] tracking-tightest text-ink">
             Drug discovery is a search problem at an{" "}
             <span className="italic text-navy">inhuman scale.</span>
@@ -51,7 +47,7 @@ export default function StatsStrip({ stats }: { stats: StatDoc[] }) {
                 {s.label}
               </div>
               {/* Underline accent */}
-              <div className="mt-4 h-[2px] w-0 bg-gradient-to-r from-gold to-navy transition-all duration-700 group-hover:w-16" />
+              <div className="mt-4 h-[2px] w-16 origin-left scale-x-0 bg-gradient-to-r from-gold to-navy transition-transform duration-700 group-hover:scale-x-100" />
             </motion.div>
           ))}
         </div>

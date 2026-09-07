@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import Capabilities from "@/components/Capabilities";
 import StatsStrip from "@/components/StatsStrip";
 import Services from "@/components/Services";
+import PlatformTeaser from "@/components/PlatformTeaser";
 import Approach from "@/components/Approach";
 import MidPageCTA from "@/components/MidPageCTA";
 import About from "@/components/About";
@@ -22,6 +23,7 @@ export default async function Home() {
       <StatsStrip stats={stats} />
       <div className="divider mx-auto max-w-[1400px]" />
       <Services />
+      <PlatformTeaser />
       <div className="divider mx-auto max-w-[1400px]" />
       <Approach />
       <MidPageCTA />

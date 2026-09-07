@@ -74,7 +74,7 @@ export default function Hero() {
           className="kicker"
         >
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold mr-2 align-middle" />
-          Generative intelligence, built for biology
+          AI-accelerated antibody discovery
         </motion.div>
 
         <motion.h1
@@ -118,8 +118,8 @@ export default function Hero() {
 
         <TextReveal
           as="p"
-          text="IndiskaAI builds foundation models and structural biology systems for drug discovery — collapsing months of wet-lab work into hours of principled, in-silico design."
-          className="mt-8 max-w-[44ch] text-[1.06rem] md:text-[1.15rem] leading-[1.55] text-ink-soft"
+          text="IndiskaAI builds antibody libraries and intelligent discovery platforms, combining molecular engineering, AI-driven data analysis, and modern sequencing technology to help biopharma partners find promising candidates faster."
+          className="mt-8 max-w-[46ch] text-[1.06rem] md:text-[1.15rem] leading-[1.55] text-ink-soft"
           delay={0.4}
         />
 
@@ -138,32 +138,6 @@ export default function Hero() {
             Partner with us
           </a>
         </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.a
-          href="#capabilities"
-          aria-label="Scroll to capabilities"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 1 }}
-          className="mt-16 md:mt-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 text-ink-muted hover:text-ink hover:border-ink/40 transition-colors"
-        >
-          <motion.svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <path d="M7 2 v9" />
-            <path d="M3 7.5 L7 11.5 L11 7.5" />
-          </motion.svg>
-        </motion.a>
       </div>
     </section>
   );

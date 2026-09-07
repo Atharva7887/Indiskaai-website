@@ -63,6 +63,13 @@ export default defineType({
     }),
 
     defineField({
+      name: "phone",
+      title: "Phone number",
+      description: "Shown in the footer as a tel: link, e.g. +91 7397967203.",
+      type: "string",
+    }),
+
+    defineField({
       name: "addressLink",
       title: "Address link (Google Maps URL)",
       description:

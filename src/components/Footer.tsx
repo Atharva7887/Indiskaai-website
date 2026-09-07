@@ -94,7 +94,7 @@ export default function Footer({
                 className="group font-display text-2xl md:text-4xl tracking-tightest hover:text-gold transition-colors duration-500"
               >
                 {primary.address}
-                <span className="block h-[1px] w-0 bg-gold transition-all duration-500 group-hover:w-full mt-1" />
+                <span className="block h-[1px] w-full origin-left scale-x-0 bg-gold transition-transform duration-500 group-hover:scale-x-100 mt-1" />
               </a>
             )}
             {secondary.length > 0 && (
@@ -130,6 +130,14 @@ export default function Footer({
               <p className="text-cream-100/85 leading-[1.6] whitespace-pre-line">
                 {settings.officeAddress}
               </p>
+            )}
+            {settings.phone && (
+              <a
+                href={`tel:${settings.phone.replace(/\s+/g, "")}`}
+                className="mt-3 inline-block text-cream-100/85 hover:text-gold transition-colors duration-300"
+              >
+                {settings.phone}
+              </a>
             )}
           </motion.div>
 
@@ -185,7 +193,6 @@ export default function Footer({
             <span>&copy; {new Date().getFullYear()} IndiskaAI. All rights reserved.</span>
           </div>
           <div className="flex gap-6">
-            <a href="/lab" className="hover:text-cream-100 transition-colors duration-300">Lab</a>
             <a href="#" className="hover:text-cream-100 transition-colors duration-300">Privacy</a>
             <a href="#" className="hover:text-cream-100 transition-colors duration-300">Terms</a>
           </div>

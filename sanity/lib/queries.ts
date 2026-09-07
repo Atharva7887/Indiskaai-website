@@ -44,6 +44,7 @@ export const SITE_SETTINGS_QUERY = groq`*[_type == "siteSettings"][0]{
   emailAddresses[]{ label, address },
   officeAddress,
   addressLink,
+  phone,
   socialLinks[]{ label, url },
   careersStatus
 }`;

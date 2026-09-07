@@ -1,9 +1,10 @@
 import Hero from "@/components/Hero";
 import Capabilities from "@/components/Capabilities";
-// Molecular Interaction scrollytelling — on ice for launch.
-// Re-enable by uncommenting the import + the <BindingSection /> below.
-// import BindingSection from "@/components/BindingSection";
+import StatsStrip from "@/components/StatsStrip";
+import Services from "@/components/Services";
+import PlatformTeaser from "@/components/PlatformTeaser";
 import Approach from "@/components/Approach";
+import MidPageCTA from "@/components/MidPageCTA";
 import About from "@/components/About";
 import Reveal from "@/components/Reveal";
 import { getCapabilities, getStats } from "../../../sanity/lib/fetch";
@@ -19,11 +20,15 @@ export default async function Home() {
       <Hero />
       <div className="divider mx-auto max-w-[1400px]" />
       <Capabilities items={capabilities} />
-      {/* <BindingSection /> */}
+      <StatsStrip stats={stats} />
+      <div className="divider mx-auto max-w-[1400px]" />
+      <Services />
+      <PlatformTeaser />
       <div className="divider mx-auto max-w-[1400px]" />
       <Approach />
+      <MidPageCTA />
       <div className="divider mx-auto max-w-[1400px]" />
-      <About stats={stats} />
+      <About />
       <Reveal />
     </main>
   );

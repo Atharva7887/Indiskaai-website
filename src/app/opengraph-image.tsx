@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "IndiskaAI — Generative Intelligence for Molecular Discovery";
+export const alt = "IndiskaAI - AI-Accelerated Antibody Discovery";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -101,7 +101,7 @@ export default async function OpengraphImage() {
             fontSize: 22,
           }}
         >
-          <span>Generative intelligence for molecular discovery</span>
+          <span>AI-accelerated antibody discovery and engineering</span>
           <span style={{ color: "#6B6B6B" }}>indiskaai.com</span>
         </div>
       </div>

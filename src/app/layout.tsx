@@ -19,16 +19,16 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL("https://indiskaai.com"),
   title: {
-    default: "IndiskaAI — Generative Intelligence for Molecular Discovery",
-    template: "%s — IndiskaAI",
+    default: "IndiskaAI - AI-Accelerated Antibody Discovery",
+    template: "%s - IndiskaAI",
   },
   description:
-    "IndiskaAI builds AI systems for structural biology and drug discovery — accelerating the path from sequence to therapeutic.",
+    "IndiskaAI builds antibody libraries and AI-driven discovery platforms, helping biopharma and biotechnology partners identify promising antibody candidates with greater speed and precision.",
   icons: { icon: "/favicon.ico" },
   openGraph: {
     title: "IndiskaAI",
     description:
-      "Generative intelligence for molecular discovery. Structural biology, foundation models, and rational design.",
+      "Antibody libraries, discovery, and engineering, powered by AI-driven data analysis and modern sequencing technology.",
     type: "website",
     siteName: "IndiskaAI",
   },
@@ -36,9 +36,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "IndiskaAI",
     description:
-      "Generative intelligence for molecular discovery.",
+      "AI-accelerated antibody discovery and engineering.",
   },
 };
+
+import Preloader from "@/components/Preloader";
 
 export default function RootLayout({
   children,
@@ -48,6 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
       <body className="antialiased">
+        <Preloader />
         {children}
         <Analytics />
       </body>

@@ -8,7 +8,7 @@ export default function StudioNotConfigured() {
           to enable the dashboard.
         </h1>
         <p className="text-ink-soft leading-[1.6] mb-8">
-          The CMS is wired and ready — once you point it at a Sanity project, the
+          The CMS is wired and ready. Once you point it at a Sanity project, the
           Capabilities, Stats, and Team content on the site will be editable
           here.
         </p>
@@ -53,7 +53,7 @@ NEXT_PUBLIC_SANITY_DATASET=production`}
         </ol>
 
         <div className="mt-10 text-xs text-ink-muted">
-          The site itself works fine without Sanity configured — content falls
+          The site itself works fine without Sanity configured. Content falls
           back to in-code defaults.
         </div>
       </div>

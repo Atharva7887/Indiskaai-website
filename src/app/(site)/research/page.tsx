@@ -168,7 +168,7 @@ const infrastructure: { label: string; value: string; detail: string }[] = [
     label: "Stack",
     value: "PyTorch · JAX · CUDA",
     detail:
-      "Owned ML stack — distributed training, mixed-precision, and reproducible experiment lineage end-to-end.",
+      "Owned ML stack: distributed training, mixed-precision, and reproducible experiment lineage end-to-end.",
   },
 ];
 

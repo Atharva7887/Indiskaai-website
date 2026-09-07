@@ -173,7 +173,7 @@ export default function Publications() {
                     href={pub.doi}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-[#1E5BA8]/30 px-4 py-1.5 text-sm font-medium text-[#1E5BA8] transition-all duration-300 hover:border-[#1E5BA8] hover:bg-[#1E5BA8] hover:text-white"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[#1E5BA8]/30 px-4 py-1.5 text-sm font-medium text-[#1E5BA8] transition-colors duration-300 hover:border-[#1E5BA8] hover:bg-[#1E5BA8] hover:text-white"
                   >
                     View paper
                     <span className="transition-transform duration-300 group-hover:translate-x-0.5">

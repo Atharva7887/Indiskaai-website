@@ -36,14 +36,10 @@ export default function Capabilities({ items }: { items: CapabilityDoc[] }) {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="kicker mb-5">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-navy mr-2 align-middle" />
-              What we do
-            </div>
             <h2 className="font-display text-[clamp(2rem,5vw,4.4rem)] leading-[0.98] tracking-tightest text-ink max-w-[14ch]">
               Four disciplines.
               <br />
-              <span className="italic text-navy">One pipeline.</span>
+              <span className="italic text-navy">Every pipeline.</span>
             </h2>
           </motion.div>
           <motion.p
@@ -53,8 +49,9 @@ export default function Capabilities({ items }: { items: CapabilityDoc[] }) {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
             className="md:max-w-[36ch] text-ink-soft text-[1.02rem] leading-[1.6]"
           >
-            We compose modern AI methods into a single, auditable workflow —
-            from initial target hypothesis through optimized lead.
+            We compose modern AI methods into an auditable workflow that
+            powers every program we run, from initial target hypothesis
+            through optimized lead.
           </motion.p>
         </div>
 
@@ -75,7 +72,7 @@ export default function Capabilities({ items }: { items: CapabilityDoc[] }) {
               >
                 <div className="flex items-baseline gap-4 mb-6">
                   <span className="kicker text-navy/70">{num}</span>
-                  <span className="block h-px flex-1 bg-black/10 transition-all duration-700 group-hover:bg-navy/30" />
+                  <span className="block h-px flex-1 bg-black/10 transition-colors duration-700 group-hover:bg-navy/30" />
                 </div>
 
                 <h3 className="font-display text-[1.85rem] md:text-[2.4rem] leading-[1.05] tracking-tightest text-ink mb-4 transition-colors duration-500 group-hover:text-navy">
@@ -90,7 +87,7 @@ export default function Capabilities({ items }: { items: CapabilityDoc[] }) {
                     {item.tags.map((t) => (
                       <span
                         key={t}
-                        className="text-[0.72rem] tracking-[0.08em] uppercase rounded-full border border-black/10 px-3 py-1 text-ink-muted bg-cream-50 transition-all duration-500 group-hover:border-navy/20 group-hover:bg-navy/5"
+                        className="text-[0.72rem] tracking-[0.08em] uppercase rounded-full border border-black/10 px-3 py-1 text-ink-muted bg-cream-50 transition-colors duration-500 group-hover:border-navy/20 group-hover:bg-navy/5"
                       >
                         {t}
                       </span>
@@ -99,9 +96,9 @@ export default function Capabilities({ items }: { items: CapabilityDoc[] }) {
                 )}
 
                 {/* Hover accent line — sweeps from left */}
-                <span className="absolute left-0 top-0 h-[2px] w-0 bg-gradient-to-r from-navy to-gold transition-all duration-700 group-hover:w-full" />
+                <span className="absolute left-0 top-0 h-[2px] w-full origin-left scale-x-0 bg-gradient-to-r from-navy to-gold transition-transform duration-700 group-hover:scale-x-100" />
                 {/* Subtle corner glow on hover */}
-                <div className="absolute top-0 left-0 w-32 h-32 bg-navy/0 group-hover:bg-navy/[0.03] rounded-br-full transition-all duration-700 pointer-events-none" />
+                <div className="absolute top-0 left-0 w-32 h-32 bg-navy/0 group-hover:bg-navy/[0.03] rounded-br-full transition-colors duration-700 pointer-events-none" />
               </motion.article>
             );
           })}

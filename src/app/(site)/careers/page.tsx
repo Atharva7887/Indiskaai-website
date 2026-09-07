@@ -42,7 +42,7 @@ const roles = [
 const principles = [
   {
     title: "Wet-lab respect.",
-    body: "We test our models against ground truth — not just held-out splits. Validation rigor is a non-negotiable.",
+    body: "We test our models against ground truth, not just held-out splits. Validation rigor is non-negotiable.",
   },
   {
     title: "Small teams, big stakes.",

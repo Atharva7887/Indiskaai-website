@@ -31,7 +31,6 @@ export default function MidPageCTA() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-[38ch]"
         >
-          <div className="kicker text-cream-300 mb-4">Partner with us</div>
           <h2 className="font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[1.05] tracking-tightest text-cream-100">
             Have a target in mind?
           </h2>
@@ -49,7 +48,7 @@ export default function MidPageCTA() {
           className="shrink-0"
         >
           <a href="/partner" className="cta cta-light">
-            Scope a program
+            Partner with us
             <span className="cta-arrow">→</span>
           </a>
         </motion.div>

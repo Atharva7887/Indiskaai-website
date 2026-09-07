@@ -47,6 +47,7 @@ export type SiteSettings = {
   emailAddresses?: EmailEntry[];
   officeAddress?: string;
   addressLink?: string;
+  phone?: string;
   socialLinks?: SocialLink[];
   careersStatus?: string;
 };
@@ -71,36 +72,36 @@ const DEFAULT_CAPABILITIES: CapabilityDoc[] = [
   {
     title: "Structure Prediction",
     description:
-      "Atom-level structure inference for proteins, complexes and nucleic acids — built on AlphaFold 3, Boltz-2 and our internal benchmarks.",
-    tags: ["AlphaFold 3", "Boltz-2", "ESMFold"],
+      "Atom-level structure inference for antibodies, nanobodies, and their complexes, built on AlphaFold 3, Boltz-2 and our internal benchmarks.",
+    tags: ["AlphaFold 3", "Boltz-2", "ABodyBuilder3"],
     order: 1,
   },
   {
     title: "Generative Design",
     description:
-      "De novo design of binders, peptides, and small molecules conditioned on target structure, chemistry, and developability constraints.",
-    tags: ["RFdiffusion", "Chai-1", "Custom diffusion"],
+      "Epitope-targeted design of new antibody and nanobody binders where no starting sequence exists, anchored by our Germinal pipeline.",
+    tags: ["Germinal", "RFdiffusion", "AbMPNN"],
     order: 2,
   },
   {
     title: "Lead Optimization",
     description:
-      "Free-energy, ADMET, and selectivity-aware optimization loops — closing the gap between an in-silico hit and a clinical candidate.",
-    tags: ["FEP+", "ADMET", "QSAR"],
+      "Affinity maturation from a validated parent antibody, ranked through ML scoring and physics-based docking rather than a blind screen.",
+    tags: ["CatBoost", "ESM-2", "MM-GBSA"],
     order: 3,
   },
   {
     title: "Foundation Modeling",
     description:
-      "Pretraining and fine-tuning of biology-specific foundation models on sequence, structure, and assay corpora — owned end-to-end.",
-    tags: ["Sequence", "Structure", "Multi-modal"],
+      "Fine-tuning of antibody-specific language models on sequence, structure, and repertoire data, owned end-to-end.",
+    tags: ["AbLang", "IgLM", "ESM-2"],
     order: 4,
   },
 ];
 
 const DEFAULT_STATS: StatDoc[] = [
-  { value: "10⁶⁰", label: "Drug-like molecules in chemical space", order: 1 },
-  { value: "<1%", label: "Targets with a tractable small-molecule lead", order: 2 },
+  { value: "10¹³", label: "Possible sequences in the human antibody repertoire", order: 1 },
+  { value: "Millions", label: "Candidates typically screened per discovery campaign", order: 2 },
   { value: "12yr", label: "Average bench-to-bedside timeline today", order: 3 },
 ];
 
@@ -111,12 +112,12 @@ const DEFAULT_RESEARCH: ResearchEntryDoc[] = [
   {
     category: "Benchmark",
     title:
-      "Benchmarking AlphaFold 3 vs. Specialist Folders on Antibody–Antigen Complexes",
+      "Benchmarking AlphaFold 3 vs. Specialist Folders on Antibody-Antigen Complexes",
     authors: "IndiskaAI Research",
     venue: "Internal technical report",
     date: "2026-04-15",
     abstract:
-      "We compare AlphaFold 3 against specialist antibody-structure models on a held-out set of 142 published Ab–Ag complexes, measured by interface DockQ, CDR-H3 accuracy, and binding-mode classification.",
+      "We compare AlphaFold 3 against specialist antibody-structure models on a held-out set of 142 published Ab-Ag complexes, measured by interface DockQ, CDR-H3 accuracy, and binding-mode classification.",
   },
   {
     category: "Benchmark",
@@ -136,7 +137,7 @@ const DEFAULT_RESEARCH: ResearchEntryDoc[] = [
     venue: "Whitepaper",
     date: "2025-09-30",
     abstract:
-      "A short reference architecture for closed-loop generative discovery — target hypothesis, structural modeling, pocket-conditioned generation, FEP-aware optimization, and developability filtering.",
+      "A short reference architecture for closed-loop generative discovery: target hypothesis, structural modeling, pocket-conditioned generation, FEP-aware optimization, and developability filtering.",
   },
 ];
 
@@ -209,8 +210,10 @@ const DEFAULT_SETTINGS: Required<SiteSettings> = {
     { label: "Careers", address: "careers@indiskaai.com" },
     { label: "Research", address: "research@indiskaai.com" },
   ],
-  officeAddress: "Pune,\nMaharashtra, India",
+  officeAddress:
+    "Office No. 1001, Gaurav Icon Tower,\nOpposite Tip Top Hotel, Wakad,\nPune - 411057, Maharashtra, India",
   addressLink: "",
+  phone: "+91 7397967203",
   socialLinks: [
     { label: "LinkedIn", url: "#" },
     { label: "X / Twitter", url: "#" },
@@ -240,6 +243,7 @@ export async function getSiteSettings(): Promise<Required<SiteSettings>> {
           : DEFAULT_SETTINGS.emailAddresses,
       officeAddress: result.officeAddress || DEFAULT_SETTINGS.officeAddress,
       addressLink: result.addressLink || DEFAULT_SETTINGS.addressLink,
+      phone: result.phone || DEFAULT_SETTINGS.phone,
       socialLinks:
         result.socialLinks && result.socialLinks.length > 0
           ? result.socialLinks

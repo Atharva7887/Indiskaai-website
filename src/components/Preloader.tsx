@@ -21,8 +21,8 @@ export default function Preloader() {
       className="fixed inset-0 z-[100] flex items-center justify-center bg-cream-50"
       initial={{ opacity: 1 }}
       animate={{ opacity: isLoading ? 1 : 0 }}
-      onAnimationComplete={(definition) => {
-        if (definition.opacity === 0) {
+      onAnimationComplete={() => {
+        if (!isLoading) {
           const el = document.getElementById("preloader");
           if (el) el.style.display = "none";
         }

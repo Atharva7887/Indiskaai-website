@@ -39,7 +39,7 @@ export default function Capabilities({ items }: { items: CapabilityDoc[] }) {
             <h2 className="font-display text-[clamp(2rem,5vw,4.4rem)] leading-[0.98] tracking-tightest text-ink max-w-[14ch]">
               Four disciplines.
               <br />
-              <span className="italic text-navy">Every pipeline.</span>
+              <span className="italic text-navy">One platform.</span>
             </h2>
           </motion.div>
           <motion.p
@@ -49,9 +49,9 @@ export default function Capabilities({ items }: { items: CapabilityDoc[] }) {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
             className="md:max-w-[36ch] text-ink-soft text-[1.02rem] leading-[1.6]"
           >
-            We compose modern AI methods into an auditable workflow that
-            powers every program we run, from initial target hypothesis
-            through optimized lead.
+            We compose modern AI methods into the auditable workflow behind
+            our platform, the same system that powers every program we run,
+            from initial target hypothesis through optimized lead.
           </motion.p>
         </div>
 

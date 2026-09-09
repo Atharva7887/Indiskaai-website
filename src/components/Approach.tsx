@@ -2,33 +2,44 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 import TextReveal from "@/components/TextReveal";
 
+/**
+ * Grouped, homepage-scale view of the real antibody lead-optimization
+ * pipeline documented in full (all 9 stages) at
+ * /platform/lead-optimization-pipeline. Every sentence here maps directly
+ * to a named stage and tool in src/lib/platform-data.ts — this is a
+ * condensed summary of that real, running pipeline, not a separate or
+ * invented process, so keep the two in sync when either changes. Labeled
+ * "Phase" rather than "Stage" so the count here (5) is never read as
+ * contradicting the full 9-stage breakdown on the Platform page.
+ */
 const stages = [
   {
-    step: "Stage 01",
-    title: "Hypothesis",
-    body: "Target identification, epitope mapping, and tractability assessment grounded in literature, structure, and our biology corpus.",
+    step: "Phase 01",
+    title: "Encode",
+    body: "The parent antibody's sequence is IMGT-numbered with ANARCI, then embedded with AbLang2, the representation every downstream step scores against.",
   },
   {
-    step: "Stage 02",
-    title: "Modeling",
-    body: "Predict structures, complexes, and binding modes. Score with ensemble scoring functions and physics-aware refinement.",
+    step: "Phase 02",
+    title: "Generate & score",
+    body: "New variants are sampled by PSSM and ESM-2 masked-language resampling from the same phage-display repertoire, then ranked by a CatBoost classifier trained on real NGS phage-panning enrichment data.",
   },
   {
-    step: "Stage 03",
-    title: "Generation",
-    body: "Generate candidate antibody variants conditioned on the target epitope, parent sequence, and developability constraints.",
+    step: "Phase 03",
+    title: "Verify structurally",
+    body: "Each candidate's Fv is folded by ABodyBuilder3, AlphaFold2-Multimer, and ESM3, co-folded against the target with Boltz-2, then rescored through Schrödinger docking with MM-GBSA.",
   },
   {
-    step: "Stage 04",
-    title: "Optimization",
-    body: "Closed-loop docking, developability, and selectivity scoring. Surface a tight portfolio of expressible, developable candidates.",
+    step: "Phase 04",
+    title: "Gate for developability",
+    body: "Humanness, liability, and novelty filters narrow the ranked shortlist to candidates worth advancing, computationally, before anything reaches a bench.",
   },
   {
-    step: "Stage 05",
-    title: "Handoff",
-    body: "A reproducible, auditable trail. Every decision, structure, and score, versioned for protein engineering and translational teams.",
+    step: "Phase 05",
+    title: "Confirm (planned)",
+    body: "A Jurkat-Luc reporter assay will confirm agonist or antagonist activity. Not yet run: every result above is in-silico, and our live CD28 and IL-2Rβ programs are at exactly this stage today.",
   },
 ];
 
@@ -62,7 +73,7 @@ export default function Approach() {
           </motion.div>
           <TextReveal
             as="p"
-            text="Drug discovery should not be a black box. Each stage of our system produces interpretable evidence, falsifiable predictions, and a trail of artifacts."
+            text="This is not a generic diagram. It is a condensed view of the antibody lead-optimization pipeline running today, in parallel, across our CD28 and IL-2Rβ programs."
             className="mt-6 text-ink-soft text-[1.02rem] leading-[1.6]"
             delay={0.1}
           />
@@ -142,6 +153,22 @@ export default function Approach() {
             ))}
           </div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          className="mt-16 md:mt-20 pl-8 md:pl-16"
+        >
+          <Link
+            href="/platform/lead-optimization-pipeline"
+            className="cta cta-ghost"
+          >
+            See the full pipeline breakdown
+            <span className="cta-arrow">→</span>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
